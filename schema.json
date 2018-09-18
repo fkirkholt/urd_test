@@ -1,0 +1,409 @@
+{
+    "tables": {
+        "adresse": {
+            "name": "adresse",
+            "icon": null,
+            "label": null,
+            "primary_key": [
+                "person"
+            ],
+            "type": "data",
+            "description": null,
+            "indexes": {
+                "person": {
+                    "name": "PRIMARY",
+                    "unique": true,
+                    "primary": true,
+                    "columns": [
+                        "person"
+                    ]
+                }
+            },
+            "foreign_keys": {
+                "person": {
+                    "name": "fk_adresse_person",
+                    "local": [
+                        "person"
+                    ],
+                    "table": "person",
+                    "foreign": [
+                        "id"
+                    ],
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "schema": "test"
+                }
+            },
+            "fields": {
+                "person": {
+                    "name": "person",
+                    "element": "select",
+                    "datatype": "integer",
+                    "nullable": false,
+                    "length": 11,
+                    "extra": "auto_increment"
+                },
+                "vei": {
+                    "name": "gate",
+                    "element": "input[type=text]",
+                    "datatype": "string",
+                    "nullable": true,
+                    "length": 15
+                },
+                "postnr": {
+                    "name": "postnr",
+                    "element": "input[type=text]",
+                    "datatype": "integer",
+                    "nullable": true,
+                    "length": 4
+                },
+                "poststed": {
+                    "name": "poststed",
+                    "element": "input[type=text]",
+                    "datatype": "string",
+                    "nullable": true,
+                    "length": 15
+                }
+            }
+        },
+        "person": {
+            "extension_tables": [
+                "adresse"
+            ],
+            "name": "person",
+            "label": null,
+            "primary_key": [
+                "id"
+            ],
+            "type": "data",
+            "indexes": {
+                "id": {
+                    "name": "PRIMARY",
+                    "unique": true,
+                    "primary": true,
+                    "columns": [
+                        "id"
+                    ]
+                },
+                "kommune": {
+                    "name": "fk_person_kommune",
+                    "unique": false,
+                    "primary": false,
+                    "columns": [
+                        "fylke",
+                        "kommune"
+                    ]
+                }
+            },
+            "foreign_keys": {
+                "fylke": {
+                    "name": "fk_person_fylke",
+                    "local": [
+                        "fylke"
+                    ],
+                    "table": "fylke",
+                    "foreign": [
+                        "nr"
+                    ],
+                    "onDelete": "RESTRICT",
+                    "onUpdate": "RESTRICT",
+                    "schema": "test"
+                },
+                "kommune": {
+                    "name": "fk_person_kommune",
+                    "local": [
+                        "fylke",
+                        "kommune"
+                    ],
+                    "table": "kommune",
+                    "foreign": [
+                        "fylke",
+                        "nr"
+                    ],
+                    "onDelete": "RESTRICT",
+                    "onUpdate": "RESTRICT",
+                    "schema": "test"
+                }
+            },
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "element": "input[type=text]",
+                    "datatype": "integer",
+                    "nullable": false,
+                    "length": 11,
+                    "extra": "auto_increment"
+                },
+                "fodselsdato": {
+                    "name": "fodselsdato",
+                    "element": "input[type=date]",
+                    "datatype": "date",
+                    "nullable": true,
+                    "length": null
+                },
+                "doept": {
+                    "name": "doept",
+                    "element": "select",
+                    "datatype": "boolean",
+                    "nullable": true,
+                    "options": [
+                        {
+                            "value": 0,
+                            "label": "Nei"
+                        },
+                        {
+                            "value": 1,
+                            "label": "Ja"
+                        }
+                    ]
+                },
+                "alder": {
+                    "name": "alder",
+                    "element": "input[type=text]",
+                    "datatype": "integer",
+                    "nullable": true,
+                    "length": 2
+                },
+                "fylke": {
+                    "name": "fylke",
+                    "element": "select",
+                    "datatype": "integer",
+                    "nullable": true,
+                    "length": 2
+                },
+                "kommune": {
+                    "name": "kommune",
+                    "element": "select",
+                    "datatype": "integer",
+                    "nullable": true,
+                    "length": 4
+                }
+            }
+        },
+        "fylke": {
+            "name": "fylke",
+            "icon": null,
+            "label": null,
+            "primary_key": [
+                "nr"
+            ],
+            "type": "reference",
+            "description": null,
+            "indexes": {
+                "nr": {
+                    "name": "PRIMARY",
+                    "unique": true,
+                    "primary": true,
+                    "columns": [
+                        "nr"
+                    ]
+                },
+                "navn": {
+                    "name": "navn",
+                    "unique": true,
+                    "primary": false,
+                    "columns": [
+                        "navn"
+                    ]
+                }
+            },
+            "foreign_keys": [],
+            "fields": {
+                "nr": {
+                    "name": "nr",
+                    "element": "input[type=text]",
+                    "datatype": "integer",
+                    "nullable": false,
+                    "length": 2,
+                    "extra": "auto_increment"
+                },
+                "navn": {
+                    "name": "navn",
+                    "element": "input[type=text]",
+                    "datatype": "string",
+                    "nullable": false,
+                    "length": 50
+                }
+            },
+            "records": [
+                {
+                    "nr": 2,
+                    "navn": "Akershus"
+                },
+                {
+                    "nr": 9,
+                    "navn": "Aust-Agder"
+                },
+                {
+                    "nr": 6,
+                    "navn": "Buskerud"
+                },
+                {
+                    "nr": 4,
+                    "navn": "Hedmark"
+                },
+                {
+                    "nr": 12,
+                    "navn": "Hordaland"
+                },
+                {
+                    "nr": 15,
+                    "navn": "Møre og Romsdal"
+                },
+                {
+                    "nr": 5,
+                    "navn": "Oppland"
+                },
+                {
+                    "nr": 3,
+                    "navn": "Oslo"
+                },
+                {
+                    "nr": 11,
+                    "navn": "Rogaland"
+                },
+                {
+                    "nr": 14,
+                    "navn": "Sogn og Fjordane"
+                },
+                {
+                    "nr": 8,
+                    "navn": "Telemark"
+                },
+                {
+                    "nr": 10,
+                    "navn": "Vest-Agder"
+                },
+                {
+                    "nr": 7,
+                    "navn": "Vestfold"
+                },
+                {
+                    "nr": 1,
+                    "navn": "Østfold"
+                }
+            ]
+        },
+        "kommune": {
+            "name": "kommune",
+            "icon": null,
+            "label": null,
+            "primary_key": [
+                "nr"
+            ],
+            "type": "data",
+            "description": null,
+            "indexes": {
+                "nr": {
+                    "name": "PRIMARY",
+                    "unique": true,
+                    "primary": true,
+                    "columns": [
+                        "nr"
+                    ]
+                },
+                "navn": {
+                    "name": "navn",
+                    "unique": true,
+                    "primary": false,
+                    "columns": [
+                        "navn"
+                    ]
+                },
+                "fylke": {
+                    "name": "fk_kommune_fylke",
+                    "unique": false,
+                    "primary": false,
+                    "columns": [
+                        "fylke"
+                    ]
+                }
+            },
+            "foreign_keys": {
+                "fylke": {
+                    "name": "fk_kommune_fylke",
+                    "local": [
+                        "fylke"
+                    ],
+                    "table": "fylke",
+                    "foreign": [
+                        "nr"
+                    ],
+                    "onDelete": "CASCADE",
+                    "onUpdate": "CASCADE",
+                    "schema": "test"
+                }
+            },
+            "fields": {
+                "nr": {
+                    "name": "nr",
+                    "element": "input[type=text]",
+                    "datatype": "integer",
+                    "nullable": false,
+                    "length": 4,
+                    "extra": "auto_increment"
+                },
+                "fylke": {
+                    "name": "fylke",
+                    "element": "select",
+                    "datatype": "integer",
+                    "nullable": false,
+                    "length": 2
+                },
+                "navn": {
+                    "name": "navn",
+                    "element": "input[type=text]",
+                    "datatype": "string",
+                    "nullable": false,
+                    "length": 50
+                }
+            }
+        },
+        "sak": {
+            "name": "sak",
+            "icon": null,
+            "label": null,
+            "primary_key": [
+                "aar",
+                "saksnr"
+            ],
+            "type": "data",
+            "description": null,
+            "indexes": {
+                "saksnr": {
+                    "name": "PRIMARY",
+                    "unique": true,
+                    "primary": true,
+                    "columns": [
+                        "aar",
+                        "saksnr"
+                    ]
+                }
+            },
+            "foreign_keys": [],
+            "fields": {
+                "aar": {
+                    "name": "aar",
+                    "element": "input[type=text]",
+                    "datatype": "integer",
+                    "nullable": false,
+                    "length": 4
+                },
+                "saksnr": {
+                    "name": "saksnr",
+                    "element": "input[type=text]",
+                    "datatype": "integer",
+                    "nullable": false,
+                    "length": 4
+                },
+                "tittel": {
+                    "name": "tittel",
+                    "element": "input[type=text]",
+                    "datatype": "string",
+                    "nullable": false,
+                    "length": 255
+                }
+            }
+        }
+    }
+}
